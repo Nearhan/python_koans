@@ -35,7 +35,26 @@ from runner.koan import *
 
 def score(dice):
     # You need to write this method
-    pass
+    total = 0
+    prev = []
+    for roll in dice:
+        if len(prev) > 2:
+            if roll == prev[-1] and roll == prev[-2] and roll == 1:
+                value = 1000 
+                prev.append(roll)
+                continue
+            elif roll == prev[-1] and roll  == prev[-2]:
+                total += (roll * 100)
+                prev.append(roll)
+                continue
+        elif roll == 5:
+            total += 50
+            prev.append(roll)
+        elif  roll == 1:
+            total += 100
+            prev.append(roll)
+    return total 
+
 
 
 class AboutScoringProject(Koan):
