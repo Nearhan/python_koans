@@ -33,29 +33,55 @@ from runner.koan import *
 #
 # Your goal is to write the score method.
 
-def score(dice):
-    # You need to write this method
-    total = 0
-    prev = []
-    for roll in dice:
-        if len(prev) > 2:
-            if roll == prev[-1] and roll == prev[-2] and roll == 1:
-                value = 1000 
-                prev.append(roll)
-                continue
-            elif roll == prev[-1] and roll  == prev[-2]:
-                total += (roll * 100)
-                prev.append(roll)
-                continue
-        elif roll == 5:
-            total += 50
-            prev.append(roll)
-        elif  roll == 1:
-            total += 100
-            prev.append(roll)
-    return total 
+#def score(dice):
+#    # You need to write this method
+#    total = 0
+#    prev = []
+#    for roll in dice:
+#        print roll
+#        if len(prev) > 2:
+#            if roll == prev[-1] and roll == prev[-2] and roll == 1:
+#                value += 1000 
+#                prev.append(roll)
+#                print total
+#            elif roll == prev[-1] and roll  == prev[-2]:
+#                total += (roll * 100)
+#                prev.append(roll)
+#                print total
+#        elif roll == 5:
+#            total += 50
+#            prev.append(roll)
+#            print total
+#        elif  roll == 1:
+#            total += 100
+#            prev.append(roll)
+#            print prev[-1]
+#            print total 
+#    return total 
 
-
+def score(dice): dic = {} total = 0
+    for x in dice:
+        dic[str(x)] = dice.count(x)
+        print dic
+    for x in dic.keys():
+        if dic[x] >=3:
+                if x == '1':
+                    sub = dic[x] - 3
+                    total += 1000 + (sub * 100)
+                elif x == '5':
+                    sub = dic[x] -3
+                    total += (int(x) *100)  + (sub * 50)
+                else:
+                    total += (int(x) * 100) 
+        elif x == '1':
+             print 'Hit'
+             total += (dic[x] * 100)
+        elif x == '5':
+            total += (dic[x] * 50)
+        else:
+            total += 0
+    return total
+    
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
